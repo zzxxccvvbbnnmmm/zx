@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .empName.ng-valid {
+            background-color: lightgreen;
+        }
+        .empName.ng-dirty.ng-invalid-required {
+            background-color: red;
+        }
+        .empName.ng-dirty.ng-invalid-minlength {
+            background-color: yellow;
+        }
+
+        .email.ng-valid {
+            background-color: lightgreen;
+        }
+        .email.ng-dirty.ng-invalid-required {
+            background-color: red;
+        }
+        .email.ng-dirty.ng-invalid-email {
+            background-color: yellow;
+        }
+    </style>
+    <link rel="stylesheet" href="aa/css/bootstrap.min.css">
+    <link href="aa/css/app.css" rel="stylesheet">
+</head>
+<body>
+<div class="generic-container" ng-controller="EmpController as ctrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading"><span class="lead"></span></div>
+        <div class="formcontainer">
+            <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+                <input type="hidden" ng-model="ctrl.employee.id" />
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" >empName</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.employee.empname" name="empName" class="form-control input-sm"    required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" >gender</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.employee.gender" name="gender" class="form-control input-sm" placeholder="Enter your Gender" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" >email</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.employee.email" name="email" class="form-control input-sm" placeholder="Enter your Email" required/>
+                            <input type="text" ng-model="ctrl.employee.did" name="email" class="form-control input-sm"  required/>
+                        </div>
+                    </div>
+                </div>
+                  <!--  <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" >did</label>
+                        <div class="col-md-7">
+
+                        </div>
+                    </div>-->
+
+
+                <div class="row">
+                    <div class="form-actions floatRight">
+                        <input type="submit"  value="{{!ctrl.employee.id ? '添加' : '修改'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">员工列表</span></div>
+        <div class="formcontainer">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>名称</th>
+                    <th>gender</th>
+                    <th>邮箱</th>
+                    <th>类型id</th>
+                    <th width="20%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="e in ctrl.employees">
+                    <td><span ng-bind="e.id"></span></td>
+                    <td><span ng-bind="e.empname"></span></td>
+                    <td><span ng-bind="e.gender"></span></td>
+                    <td><span ng-bind="e.email"></span></td>
+                    <td><span ng-bind="e.did"></span></td>
+                    <td>
+                        <button type="button" ng-click="ctrl.edit(e.id)" class="btn btn-success btn-xs">修改</button>
+                        <button type="button" ng-click="ctrl.remove(e.id)" class="btn btn-danger btn-xs">删除</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="aa/js/angular.js"></script>
+<script type="text/javascript" src="aa/js/app.js"></script>
+<script type="text/javascript" src="aa/js/service/empService.js"></script>
+<script type="text/javascript" src="aa/js/controller/empController.js"></script>
+</body>
+</html>
